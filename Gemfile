@@ -25,6 +25,8 @@ group :test do
   gem "capybara"
   gem "guard-rspec"
   gem "growl"
+  gem "spork", "~> 0.9.0.rc"
+  gem "guard-spork"
 end
 
 # To use ActiveModel has_secure_password
