@@ -1,0 +1,26 @@
+a {
+  color: #888;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  border-bottom: 1px solid #555;
+}
+
+input.inline {
+  display: inline;
+  width: 150px;
+}
+
+input[type="submit"].inline {
+  width: 75px;
+}
+
+.right {
+  float: right;
+}
+
+header {
+  margin: 20px 0 0 0;
+}
