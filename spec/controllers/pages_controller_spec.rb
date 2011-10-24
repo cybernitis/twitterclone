@@ -15,13 +15,3 @@ describe PagesController do
     end
   end
 end
-
-def hello
-  puts "World"
-end
-
-if hello
-  puts :hell
-else
-  puts :yeah
-end
