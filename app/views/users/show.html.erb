@@ -1,1 +1,11 @@
-<%= @user.username %>, <%= @user.email %>
+<div class="twelve columns alpha">
+  <div class="two columns alpha">
+    <%= gravatar_for @user %>
+  </div>
+  <div class="four columns">
+    <h2><%= @user.username %></h2>
+  </div>
+</div>
+<div class="two columns omega">
+  <%= link_to user_path(@user), user_path(@user) %>
+</div>

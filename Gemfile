@@ -18,6 +18,8 @@ end
 
 gem 'jquery-rails'
 
+gem 'gravatar_image_tag'
+
 gem "rspec-rails", :group => [:test, :development]
 
 group :test do
