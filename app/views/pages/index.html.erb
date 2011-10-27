@@ -4,12 +4,12 @@
   </div>
   <div class="one columns omega offset-by-two">
     <h3>Sign up</h3>
-    <form>
-      <input type="text" placeholder="username" />
-      <input type="text" placeholder="email" />
-      <input type="password" placeholder="password" />
-      <input type="password" placeholder="confirm password" />
-      <input type="submit" value="Sign up" class="button" />
-    </form>
+    <%= form_for @user do |f| %>
+      <%= f.text_field :username, :placeholder => "username" %>
+      <%= f.text_field :email, :placeholder => "email" %>
+      <%= f.password_field :password, :placeholder => "password" %>
+      <%= f.password_field :password_confirmation, :placeholder => "password confirmation" %>
+      <%= f.submit :value => "Sign up" %>
+    <% end %>
   </div>
 </section>
