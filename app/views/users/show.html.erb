@@ -2,8 +2,11 @@
   <div class="two columns alpha">
     <%= gravatar_for @user %>
   </div>
-  <div class="four columns">
-    <h2><%= @user.username %></h2>
+  <div class="six columns">
+    <h2><%= @user.name %></h2>
+    <div class="meta">
+      <%= @user.username %>
+    </div>
   </div>
 </div>
 <div class="two columns omega">

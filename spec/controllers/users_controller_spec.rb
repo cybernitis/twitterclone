@@ -25,7 +25,7 @@ describe UsersController do
 
     it "should have the user's name" do
       get :show, :id => @user
-      response.should have_selector('h2', :content => @user.username)
+      response.should have_selector('h2', :content => @user.name)
     end
 
     it "should have a profile image" do
