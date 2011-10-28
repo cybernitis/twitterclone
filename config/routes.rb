@@ -1,8 +1,15 @@
 Twitter::Application.routes.draw do
 
+  get "sessions/new"
+
   resources :users
+  resources :sessions, :only => [:new, :create, :destroy]
+
 
   root :to => 'pages#index'
+
+  match 'signin' => 'sessions#new'
+  match 'signout' => 'sessions#destroy'
 
   get "/pages/index"
   # The priority is based upon order of creation:

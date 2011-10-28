@@ -3,10 +3,10 @@
     <h1><%= link_to 'Twitter', root_path %></h1>
   </div>
   <div class="eight columns omega right">
-    <form>
-      <input type="text" class="inline" placeholder="username" />
-      <input type="password" class="inline" placeholder="password" />
-      <input type="submit" value="Sign in" class="button inline" />
-    </form>
+    <%= form_for(:session, :url => sessions_path) do |f| %>
+      <%= f.text_field :username, :class => "inline", :placeholder => "username" %>
+      <%= f.password_field :password, :class => "inline", :placeholder => "password" %>
+      <%= f.submit :value => "Sign in", :class => "button inline" %>
+    <% end %>
   </div>
 </header>
