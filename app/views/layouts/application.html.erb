@@ -10,7 +10,17 @@
 <div class="container">
   <%= render 'layouts/header' %>
   <hr />
+  <% flash.each do |key, value| %>
+    <div class="flash <%= key %> alert-message">
+      <%= value %>
+      <a class="close" href="#">×</a>
+    </div>
+  <% end %>
   <%= yield %>
 </div>
+<%= debug params if Rails.env.development? %>
 </body>
+<script>
+  $(".alert-message").alert()
+</script>
 </html>

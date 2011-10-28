@@ -3,13 +3,6 @@
     <p>This is <a href="http://twitter.com">Twitter</a> clone app, made by <a href="http://twitter.com/indiche/">indiche</a>. Purpose of this app is to help me improve my <a href="http://rubyonrails.com">Ruby on Rails</a> skills.</p>
   </div>
   <div class="one columns omega offset-by-two">
-    <h3>Sign up</h3>
-    <%= form_for @user do |f| %>
-      <%= f.text_field :username, :placeholder => "username" %>
-      <%= f.text_field :email, :placeholder => "email" %>
-      <%= f.password_field :password, :placeholder => "password" %>
-      <%= f.password_field :password_confirmation, :placeholder => "password confirmation" %>
-      <%= f.submit :value => "Sign up" %>
-    <% end %>
+    <%= render 'users/sign_up' %>
   </div>
 </section>

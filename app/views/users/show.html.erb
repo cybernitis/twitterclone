@@ -3,7 +3,7 @@
     <%= gravatar_for @user %>
   </div>
   <div class="six columns">
-    <h2><%= @user.name %></h2>
+    <%= "<h2>#{@user.name}</h2>" if @user.name %>
     <div class="meta">
       <%= @user.username %>
     </div>
