@@ -2,15 +2,17 @@ class User < ActiveRecord::Base
   attr_accessor   :password
   attr_accessible :username, :email, :password, :password_confirmation, :name
 
-  validates :username, :presence  => true,
-                       :length    => { :maximum => 50 },
+  validates :username, :presence   => true,
+                       :length     => { :maximum => 50 },
                        :uniqueness => { :case_sensitive => false }
-  validates :email, :presence => true,
-                    :format   => { :with => /^[\w.+\-]+@[a-z\d.]+\.[a-z]+$/i },
+
+  validates :email, :presence   => true,
+                    :format     => { :with => /^[\w.+\-]+@[a-z\d.]+\.[a-z]+$/i },
                     :uniqueness => { :case_sensitive => false }
-  validates :password, :presence => true,
+
+  validates :password, :presence     => true,
                        :confirmation => true,
-                       :length => { :within => 6..12 }
+                       :length       => { :within => 6..12 }
 
   before_save :encrypt_password
 
