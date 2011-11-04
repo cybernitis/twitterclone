@@ -52,7 +52,7 @@ describe UsersController do
     describe "failure" do
       
       before :each do
-        @attr = { :name => "", :email => "", :password => "", :password_confirmation => "" }
+        @attr = { :username => "", :email => "", :password => "", :password_confirmation => "" }
       end
 
       it "should have the right title" do
@@ -101,22 +101,55 @@ describe UsersController do
     end
   end
 
+  describe "GET 'edit" do
+    before :each do
+      @user = Factory :user
+      test_sign_in(@user)
+    end
+
+    it "should be successful" do
+      get :edit, :id => @user
+      response.should be_success
+    end
+
+    it "should have the right title" do
+      get :edit, :id => @user
+      response.should have_selector('title', :content => "Edit profile")
+    end
+  end
+
   describe "PUT 'update'" do
 
+    before :each do
+      @user = Factory :user
+      test_sign_in @user
+    end
+
     describe "failure" do
+      
       before :each do
-        @user = Factory :user
-        @attr = { :username => "example", :email => "user@example.com", :name => "Example User" }
+        @attr = {
+          :username => "",
+          :name => "",
+          :email => "",
+          :password => "",
+          :password_confirmation => ""
+        }
       end
 
       it "should have to right title" do
-        post :update, :id => @user
-        response.should have_selector('title', :content => "Update profile")
+        put :update, :id => @user, :user => @attr
+        response.should have_selector('title', :content => "Edit profile")
       end
 
       it "should render the 'update' page" do
-        post :update, :id => @user
+        put :update, :id => @user, :user => @attr
         response.should render_template('edit')
+      end
+
+      it "should have an error message" do
+        put :update, :id => @user, :user => @attr
+        flash[:error].should =~ /please fill in all required fields/i
       end
       
       it "should not update the user" do
@@ -127,14 +160,23 @@ describe UsersController do
 
     describe "success" do
       before :each do
-        @user = Factory :user
-        @attr = { :username => "foobar", :email => "foo@bar.com", :password => "foobar", :password_confirmation => "foobar", :name => "Foo Bar" }
+        @attr = { 
+          :username => "username",
+          :email    => "user@name.com",
+          :password => "password",
+          :password_confirmation => "password",
+          :name     => "User Name"
+        }
       end
 
       it "should update the user" do
         put :update, :id => @user, :user => @attr
+        user = assigns :user
         @user.reload
-        @user.name.should == @attr[:name]
+        @user.username.should == user.username
+        @user.name.should == user.name
+        @user.email.should == user.email
+        @user.encrypted_password.should == user.encrypted_password
       end
 
       it "should redirect to show page" do
@@ -144,7 +186,7 @@ describe UsersController do
 
       it "should have an success message" do
         put :update, :id => @user, :user => @attr
-        flash[:success].should =~ /your profile has been updated!/i
+        flash[:success].should =~ /your profile has been updated/i
       end
     end
   end

@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
 
+  def show
+    @user = User.find(params[:id])
+    @title = @user.username
+  end
+
   def new
     @user = User.new
     @title = "Sign up"
@@ -16,21 +21,18 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-    @user = User.find(params[:id])
-    @title = @user.username
-  end
-
   def edit
     @user = User.find(params[:id])
+    @title = "Edit profile"
   end
 
   def update
     @user = User.find(params[:id])
-    @title = "Update profile"
+    @title = "Edit profile"
     if @user.update_attributes(params[:user])
-      redirect_to @user, :flash => { :success => "Your profile has been updated!" }
+      redirect_to @user, :flash => { :success => "Your profile has been updated." }
     else
+      flash.now[:error] = "Please fill in all required fields."
       render 'edit'
     end
   end
