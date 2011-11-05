@@ -5,7 +5,7 @@ describe UsersController do
 
   describe "GET 'show'" do
     before :each do
-      @user = Factory(:user)
+      @user = Factory :user
     end
 
     it "should be successful" do
@@ -101,10 +101,10 @@ describe UsersController do
     end
   end
 
-  describe "GET 'edit" do
+  describe "GET 'edit'" do
     before :each do
       @user = Factory :user
-      test_sign_in(@user)
+      test_sign_in @user
     end
 
     it "should be successful" do
@@ -191,4 +191,38 @@ describe UsersController do
     end
   end
 
+  describe "authentication of edit/update actions" do
+    
+    before :each do
+      @user = Factory :user
+    end
+
+    it "should deny acces to 'edit'" do
+      get :edit, :id => @user
+      response.should redirect_to(signin_path)
+    end
+
+    it "should deny access to 'update'" do
+      put :update, :id => @user, :user => {}
+      response.should redirect_to(signin_path)
+    end
+
+    describe "for signed-in users" do
+
+      before :each do
+        user = Factory(:user, :username => "example", :email => "indiche@example.net")
+        test_sign_in(user)
+      end
+
+      it "should require matching users for 'edit'" do
+        get :edit, :id => @user
+        response.should redirect_to(root_path)
+      end
+
+      it "should require matching users for 'update'" do
+        put :update, :id => @user, :user => {}
+        response.should redirect_to(root_path)
+      end
+    end
+  end
 end
